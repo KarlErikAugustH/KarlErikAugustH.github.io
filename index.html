@@ -1,11 +1,208 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>CV</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Scientist Resume - Alex Johnson</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .header {
+      text-align: center;
+      border-bottom: 2px solid #333;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      margin: 0;
+      color: #333;
+      font-size: 2.5em;
+    }
+    .header p {
+      margin: 5px 0;
+      color: #666;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .section h2 {
+      color: #333;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+      font-size: 1.5em;
+    }
+    .job, .education, .project {
+      margin-bottom: 20px;
+    }
+    .job h3, .education h3, .project h3 {
+      margin: 0 0 5px 0;
+      color: #444;
+    }
+    .job .company, .job .location, .education .school, .education .degree {
+      color: #666;
+      font-style: italic;
+    }
+    .skills ul {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      padding: 0;
+    }
+    .skills li {
+      background-color: #e9ecef;
+      margin: 5px;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+    .contact {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .contact span {
+      margin: 0 15px;
+    }
+  </style>
 </head>
 <body>
-  <h1>CV </h1>
-  <p>Testing Testing</p>
-  <p>Testing2</p>
+  <div class="container">
+    <div class="header">
+      <h1>Alex Johnson</h1>
+      <p>Data Scientist</p>
+      <div class="contact">
+        <span>📧 alex.johnson@email.com</span>
+        <span>📱 (555) 123-4567</span>
+        <span>🔗 linkedin.com/in/alexjohnson</span>
+        <span>💻 github.com/alexjohnson</span>
+        <span>📍 San Francisco, CA</span>
+      </div>
+    </div>
+
+    <div class="section summary">
+      <h2>Professional Summary</h2>
+      <p>Experienced Data Scientist with 5+ years of expertise in machine learning, statistical analysis, and big data technologies. Proven track record of developing predictive models that drive business decisions and optimize processes. Skilled in Python, R, SQL, and cloud platforms. Passionate about extracting insights from complex datasets to solve real-world problems.</p>
+    </div>
+
+    <div class="section skills">
+      <h2>Technical Skills</h2>
+      <ul>
+        <li>Python (Pandas, NumPy, Scikit-learn, TensorFlow)</li>
+        <li>R (dplyr, ggplot2, caret)</li>
+        <li>SQL & NoSQL Databases</li>
+        <li>Machine Learning (Regression, Classification, Clustering, NLP)</li>
+        <li>Big Data (Spark, Hadoop)</li>
+        <li>Cloud Platforms (AWS, GCP)</li>
+        <li>Visualization (Tableau, Power BI, Matplotlib)</li>
+        <li>Statistical Analysis</li>
+        <li>Deep Learning</li>
+        <li>A/B Testing</li>
+      </ul>
+    </div>
+
+    <div class="section experience">
+      <h2>Professional Experience</h2>
+
+      <div class="job">
+        <h3>Senior Data Scientist</h3>
+        <p class="company">TechCorp Inc., San Francisco, CA</p>
+        <p class="location">January 2022 - Present</p>
+        <ul>
+          <li>Led development of machine learning models for customer churn prediction, achieving 15% reduction in churn rate</li>
+          <li>Built recommendation engine using collaborative filtering, increasing user engagement by 25%</li>
+          <li>Conducted A/B tests and statistical analysis to optimize product features and user experience</li>
+          <li>Mentored junior data scientists and established best practices for model deployment</li>
+          <li>Collaborated with cross-functional teams to integrate data science solutions into production systems</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>Data Scientist</h3>
+        <p class="company">DataTech Solutions, Oakland, CA</p>
+        <p class="location">June 2019 - December 2021</p>
+        <ul>
+          <li>Developed predictive analytics models for supply chain optimization, reducing inventory costs by 20%</li>
+          <li>Created automated reporting dashboards using Tableau, saving 10 hours of manual reporting per week</li>
+          <li>Implemented natural language processing algorithms for customer feedback analysis</li>
+          <li>Conducted exploratory data analysis on large datasets to identify business insights</li>
+          <li>Participated in data engineering tasks, including ETL pipeline development</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>Data Analyst</h3>
+        <p class="company">Analytics Pro, San Jose, CA</p>
+        <p class="location">August 2017 - May 2019</p>
+        <ul>
+          <li>Performed statistical analysis and data visualization for marketing campaigns</li>
+          <li>Built SQL queries to extract and analyze customer behavior data</li>
+          <li>Created predictive models using regression analysis to forecast sales</li>
+          <li>Automated data processing workflows, improving efficiency by 30%</li>
+          <li>Presented findings to stakeholders and recommended data-driven strategies</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section education">
+      <h2>Education</h2>
+
+      <div class="education">
+        <h3>Master of Science in Data Science</h3>
+        <p class="school">Stanford University, Stanford, CA</p>
+        <p>2015 - 2017</p>
+        <p>GPA: 3.8/4.0</p>
+      </div>
+
+      <div class="education">
+        <h3>Bachelor of Science in Statistics</h3>
+        <p class="school">University of California, Berkeley, CA</p>
+        <p>2011 - 2015</p>
+        <p>GPA: 3.6/4.0</p>
+      </div>
+    </div>
+
+    <div class="section projects">
+      <h2>Key Projects</h2>
+
+      <div class="project">
+        <h3>Fraud Detection System</h3>
+        <p>Developed an anomaly detection model using unsupervised learning techniques to identify fraudulent transactions. Achieved 95% accuracy in detecting fraud while minimizing false positives.</p>
+        <p><strong>Technologies:</strong> Python, Scikit-learn, Apache Spark</p>
+      </div>
+
+      <div class="project">
+        <h3>Customer Segmentation Analysis</h3>
+        <p>Applied clustering algorithms to segment customers based on purchasing behavior, leading to targeted marketing campaigns that increased conversion rates by 18%.</p>
+        <p><strong>Technologies:</strong> R, dplyr, ggplot2, K-means clustering</p>
+      </div>
+
+      <div class="project">
+        <h3>Sentiment Analysis Dashboard</h3>
+        <p>Built an interactive dashboard for real-time sentiment analysis of social media data using NLP techniques and deployed on AWS.</p>
+        <p><strong>Technologies:</strong> Python, NLTK, AWS, Streamlit</p>
+      </div>
+    </div>
+
+    <div class="section certifications">
+      <h2>Certifications</h2>
+      <ul>
+        <li>Certified Data Scientist (CDS) - Data Science Council of America (2023)</li>
+        <li>AWS Certified Machine Learning - Specialty (2022)</li>
+        <li>Google Cloud Professional Data Engineer (2021)</li>
+        <li>TensorFlow Developer Certificate (2020)</li>
+      </ul>
+    </div>
+  </div>
 </body>
 </html>
