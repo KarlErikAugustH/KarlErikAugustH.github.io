@@ -1,11 +1,1617 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv">
 <head>
-  <title>CV</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EH Tech AB bygger AI- och n8n-automationer som sparar tid, minskar manuellt arbete och skapar mätbar ROI.">
+  <title>EH Tech AB | AI-automation som skapar mätbar ROI</title>
+  <style>
+    :root {
+      --bg: #f7f9fb;
+      --surface: #ffffff;
+      --surface-soft: #eef5f4;
+      --ink: #102027;
+      --muted: #5e6f76;
+      --line: #dbe6e9;
+      --teal: #0f766e;
+      --teal-dark: #0b514c;
+      --mint: #7dd3c7;
+      --blue: #2563eb;
+      --amber: #f59e0b;
+      --violet: #7c3aed;
+      --rose: #e11d48;
+      --shadow: 0 24px 80px rgba(16, 32, 39, 0.12);
+      --shadow-strong: 0 34px 110px rgba(16, 32, 39, 0.2);
+      --radius: 8px;
+      --max: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(125, 211, 199, 0.18), transparent 28%),
+        radial-gradient(circle at 82% 8%, rgba(37, 99, 235, 0.12), transparent 26%),
+        linear-gradient(135deg, rgba(15, 118, 110, 0.09), rgba(37, 99, 235, 0.04) 36%, transparent 68%),
+        var(--bg);
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ambient::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        linear-gradient(120deg, transparent 0 24%, rgba(15, 118, 110, 0.12) 34%, transparent 44% 100%),
+        linear-gradient(300deg, transparent 0 46%, rgba(37, 99, 235, 0.1) 56%, transparent 66% 100%),
+        linear-gradient(180deg, transparent, rgba(245, 158, 11, 0.06), transparent);
+      filter: blur(16px);
+      animation: auroraShift 18s ease-in-out infinite alternate;
+    }
+
+    .ambient::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(16, 32, 39, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 32, 39, 0.04) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), transparent 68%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -48px;
+      z-index: 100;
+      padding: 10px 14px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: var(--radius);
+      transition: top 160ms ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247, 249, 251, 0.78);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(219, 230, 233, 0.82);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      border-radius: 8px;
+      box-shadow: 0 14px 32px rgba(15, 118, 110, 0.24);
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 0.76rem;
+      color: var(--muted);
+      font-weight: 650;
+      margin-top: -3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.94rem;
+      font-weight: 650;
+      color: #31444b;
+    }
+
+    .nav-links a {
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 2px;
+      background: var(--teal);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 180ms ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    .menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      font-weight: 760;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+      box-shadow: 0 16px 36px rgba(15, 118, 110, 0.26);
+    }
+
+    .button-secondary {
+      color: var(--ink);
+      background: #fff;
+      border-color: var(--line);
+      box-shadow: 0 12px 30px rgba(16, 32, 39, 0.08);
+    }
+
+    .button-full {
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      padding: 96px 0 72px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(15, 118, 110, 0.1), transparent 38%),
+        linear-gradient(rgba(15, 118, 110, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+      background-size: auto, 72px 72px, 72px 72px;
+      mask-image: radial-gradient(circle at 50% 20%, #000, transparent 72%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -14vw;
+      top: 12%;
+      width: 56vw;
+      height: 240px;
+      z-index: -1;
+      background: linear-gradient(100deg, transparent, rgba(125, 211, 199, 0.22), rgba(37, 99, 235, 0.12), transparent);
+      transform: rotate(-12deg);
+      filter: blur(20px);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.78fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 7px 10px;
+      border: 1px solid rgba(15, 118, 110, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      color: var(--teal-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 6px rgba(15, 118, 110, 0.12);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 780px;
+      font-size: clamp(2.7rem, 7vw, 5.8rem);
+      font-weight: 880;
+      color: transparent;
+      background: linear-gradient(115deg, #102027 0 45%, var(--teal) 64%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 850;
+    }
+
+    h3 {
+      font-size: 1.18rem;
+      font-weight: 820;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .lead {
+      max-width: 710px;
+      margin-top: 24px;
+      font-size: clamp(1.08rem, 2vw, 1.28rem);
+      color: #43575f;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .hero-proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 42px;
+    }
+
+    .proof-item {
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(219, 230, 233, 0.86);
+      border-radius: var(--radius);
+    }
+
+    .proof-item strong {
+      display: block;
+      font-size: 1.45rem;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 5px;
+    }
+
+    .proof-item span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 20px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.86), rgba(238, 245, 244, 0.72)),
+        rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 18px;
+      box-shadow: var(--shadow-strong);
+      transform: perspective(1100px) rotateY(-4deg) rotateX(2deg);
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: -1;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(125, 211, 199, 0.8), rgba(37, 99, 235, 0.32), rgba(245, 158, 11, 0.26));
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(125, 211, 199, 0.2);
+      pointer-events: none;
+    }
+
+    .dashboard {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(125, 211, 199, 0.1), transparent 34%),
+        linear-gradient(315deg, rgba(37, 99, 235, 0.18), transparent 38%),
+        #102027;
+      border-radius: 12px;
+      color: #fff;
+    }
+
+    .dashboard::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      transform: translateX(-100%);
+      animation: scanLine 5.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .dashboard::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .dashboard-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .window-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #7dd3c7;
+    }
+
+    .window-dots span:nth-child(2) {
+      background: #fbbf24;
+    }
+
+    .window-dots span:nth-child(3) {
+      background: #60a5fa;
+    }
+
+    .dashboard-label {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.8rem;
+      font-weight: 750;
+    }
+
+    .flow {
+      position: relative;
+      z-index: 1;
+      padding: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .flow-row {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .flow-row:hover {
+      transform: translateX(4px);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(125, 211, 199, 0.24);
+    }
+
+    .flow-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      background: rgba(125, 211, 199, 0.13);
+      color: var(--mint);
+      font-weight: 900;
+    }
+
+    .flow-row strong {
+      display: block;
+      font-size: 0.94rem;
+      margin-bottom: 2px;
+    }
+
+    .flow-row span {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.82rem;
+    }
+
+    .status {
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(125, 211, 199, 0.14);
+      color: #a7f3d0;
+      font-size: 0.74rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .signal-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      padding: 0 22px 22px;
+    }
+
+    .signal {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .signal strong {
+      display: block;
+      color: #fff;
+      font-size: 0.98rem;
+      line-height: 1.1;
+    }
+
+    .signal span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 0.72rem;
+      font-weight: 740;
+    }
+
+    .section {
+      padding: 86px 0;
+    }
+
+    .section.alt {
+      background: #fff;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(280px, 0.55fr);
+      gap: 42px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+
+    .section-kicker {
+      margin-bottom: 12px;
+      color: var(--teal);
+      font-size: 0.82rem;
+      font-weight: 860;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .section-copy {
+      font-size: 1.04rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      position: relative;
+      padding: 24px;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(247, 249, 251, 0.94)),
+        var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 16px 38px rgba(16, 32, 39, 0.06);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(125, 211, 199, 0.16), transparent 34%, rgba(37, 99, 235, 0.08));
+      opacity: 0;
+      transition: opacity 180ms ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(15, 118, 110, 0.28);
+      box-shadow: 0 24px 70px rgba(16, 32, 39, 0.12);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .problem-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      min-height: 124px;
+    }
+
+    .icon {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      color: var(--teal-dark);
+      background:
+        linear-gradient(135deg, rgba(125, 211, 199, 0.34), rgba(37, 99, 235, 0.1)),
+        var(--surface-soft);
+      box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.08);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+    }
+
+    .solution-band {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(280px, 0.45fr);
+      gap: 30px;
+      padding: 34px;
+      background:
+        linear-gradient(135deg, rgba(125, 211, 199, 0.14), transparent 32%),
+        linear-gradient(315deg, rgba(37, 99, 235, 0.18), transparent 38%),
+        linear-gradient(135deg, #102027, #123b3b);
+      color: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .solution-band p {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 1.08rem;
+      margin-top: 16px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 10px;
+      color: inherit;
+    }
+
+    .check {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(125, 211, 199, 0.16);
+      color: var(--mint);
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .featured {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(320px, 0.62fr);
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .feature-copy {
+      padding: 34px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-copy .lead {
+      margin-top: 18px;
+      font-size: 1.08rem;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfdfd;
+      color: #31444b;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .conversation {
+      min-height: 100%;
+      padding: 22px;
+      background:
+        linear-gradient(135deg, rgba(125, 211, 199, 0.12), transparent 30%),
+        linear-gradient(315deg, rgba(124, 58, 237, 0.16), transparent 44%),
+        #102027;
+      border-radius: 18px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .chat {
+      display: grid;
+      gap: 12px;
+    }
+
+    .bubble {
+      max-width: 88%;
+      padding: 13px 14px;
+      border-radius: 14px;
+      color: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 0.92rem;
+    }
+
+    .bubble.ai {
+      margin-left: auto;
+      background: rgba(125, 211, 199, 0.16);
+      border: 1px solid rgba(125, 211, 199, 0.22);
+    }
+
+    .routing-box {
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+    }
+
+    .routing-box strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .routing-box span {
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 0.9rem;
+    }
+
+    .service-card {
+      min-height: 196px;
+    }
+
+    .service-card p {
+      margin-top: 12px;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.46fr) minmax(0, 0.74fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .sticky-note {
+      position: sticky;
+      top: 104px;
+      padding: 30px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 34%),
+        linear-gradient(135deg, var(--teal), #164e63);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .sticky-note p {
+      margin-top: 16px;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .method-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .method-card {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 18px;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .number {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+      color: var(--teal-dark);
+      font-weight: 900;
+    }
+
+    .roi-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .metric {
+      padding: 22px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(238, 245, 244, 0.82));
+      border: 1px solid var(--line);
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .metric:hover {
+      transform: translateY(-4px);
+      border-color: rgba(15, 118, 110, 0.28);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.04rem;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .process {
+      counter-reset: step;
+    }
+
+    .process-card {
+      min-height: 180px;
+    }
+
+    .process-card::before {
+      counter-increment: step;
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background: #102027;
+      color: #fff;
+      font-weight: 850;
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 0.74fr) minmax(320px, 0.58fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .contact-panel {
+      padding: 34px;
+      border-radius: 18px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(125, 211, 199, 0.16), transparent 30%),
+        linear-gradient(315deg, rgba(37, 99, 235, 0.16), transparent 42%),
+        linear-gradient(135deg, #102027, #0f766e);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .contact-panel p {
+      margin-top: 18px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 1.08rem;
+    }
+
+    .contact-form {
+      padding: 28px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field-full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #31444b;
+      font-size: 0.9rem;
+      font-weight: 760;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      min-height: 46px;
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfdfd;
+      color: var(--ink);
+      font: inherit;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    textarea {
+      min-height: 116px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+    }
+
+    .form-note {
+      min-height: 24px;
+      margin: 14px 0;
+      color: var(--teal-dark);
+      font-weight: 750;
+    }
+
+    .site-footer {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 620ms ease, transform 620ms ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes auroraShift {
+      0% {
+        transform: translate3d(-2%, -1%, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate3d(2%, 1%, 0) rotate(4deg);
+      }
+    }
+
+    @keyframes scanLine {
+      0%, 46% {
+        transform: translateX(-105%);
+      }
+
+      72%, 100% {
+        transform: translateX(105%);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+
+      .fade-in {
+        opacity: 1;
+        transform: none;
+      }
+
+      .ambient::before,
+      .dashboard::before {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .featured,
+      .work-grid,
+      .contact-wrap,
+      .solution-band,
+      .section-header {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3,
+      .grid-4,
+      .roi-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .sticky-note {
+        position: static;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .menu-button {
+        display: inline-grid;
+        place-items: center;
+      }
+
+      .nav-links {
+        position: fixed;
+        inset: 68px 14px auto 14px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        padding: 14px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px;
+        border-radius: var(--radius);
+      }
+
+      .nav-links a:hover {
+        background: var(--surface-soft);
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero {
+        padding: 64px 0 48px;
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .hero-proof,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .benefit-grid,
+      .roi-strip,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-row {
+        grid-template-columns: 38px 1fr;
+      }
+
+      .hero-panel {
+        transform: none;
+      }
+
+      .flow-row .status {
+        grid-column: 2;
+        width: max-content;
+      }
+
+      .signal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .solution-band,
+      .feature-copy,
+      .contact-panel,
+      .contact-form {
+        padding: 24px;
+      }
+
+      .method-card {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>CV </h1>
-  <p>Testing Testing</p>
-  <p>Testing2</p>
+  <div class="ambient" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Hoppa till innehåll</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Huvudnavigation">
+      <a class="brand" href="#top" aria-label="EH Tech AB startsida">
+        <span class="brand-mark" aria-hidden="true">EH</span>
+        <span class="brand-text">EH Tech AB <span>AI-automation & n8n</span></span>
+      </a>
+      <button class="menu-button" type="button" aria-label="Öppna meny" aria-expanded="false" aria-controls="nav-links">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#losningar">Lösningar</a>
+        <a href="#ai-receptionist">AI-receptionist</a>
+        <a href="#hur-jag-jobbar">Hur jag jobbar</a>
+        <a href="#roi">ROI</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <a class="button button-primary nav-cta" href="#kontakt">Boka ett samtal</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="fade-in">
+          <p class="eyebrow"><span class="pulse" aria-hidden="true"></span> Praktisk AI-automation för företag</p>
+          <h1 id="hero-title">AI-automation som skapar mätbar ROI</h1>
+          <p class="lead">EH Tech AB bygger skräddarsydda AI- och n8n-automationer som sparar tid, minskar manuellt arbete och förbättrar kundkommunikation.</p>
+          <div class="hero-actions" aria-label="Primära åtgärder">
+            <a class="button button-primary" href="#kontakt">Boka ett samtal</a>
+            <a class="button button-secondary" href="#losningar">Utforska lösningar</a>
+          </div>
+          <div class="hero-proof" aria-label="Värdeområden">
+            <div class="proof-item">
+              <strong>Snabbare</strong>
+              <span>från behov till fungerande automation</span>
+            </div>
+            <div class="proof-item">
+              <strong>Färre</strong>
+              <span>manuella steg i kritiska processer</span>
+            </div>
+            <div class="proof-item">
+              <strong>Tydlig</strong>
+              <span>uppföljning på tid, kvalitet och ROI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel fade-in" aria-label="Illustration av automationsflöde">
+          <div class="dashboard">
+            <div class="dashboard-top">
+              <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="dashboard-label">Live automation</span>
+            </div>
+            <div class="flow">
+              <div class="flow-row">
+                <div class="flow-icon" aria-hidden="true">1</div>
+                <div>
+                  <strong>Kunddialog tas emot</strong>
+                  <span>Samtal, formulär, e-post eller chatt</span>
+                </div>
+                <span class="status">Direkt</span>
+              </div>
+              <div class="flow-row">
+                <div class="flow-icon" aria-hidden="true">2</div>
+                <div>
+                  <strong>AI kvalificerar ärendet</strong>
+                  <span>Behov, prioritet och nästa steg</span>
+                </div>
+                <span class="status">Smart</span>
+              </div>
+              <div class="flow-row">
+                <div class="flow-icon" aria-hidden="true">3</div>
+                <div>
+                  <strong>n8n skickar vidare</strong>
+                  <span>CRM, Slack, e-post eller affärssystem</span>
+                </div>
+                <span class="status">Integrerat</span>
+              </div>
+            </div>
+            <div class="signal-grid" aria-label="Automationsresultat">
+              <div class="signal">
+                <strong>24/7</strong>
+                <span>Tillgänglighet</span>
+              </div>
+              <div class="signal">
+                <strong>CRM</strong>
+                <span>Synkat direkt</span>
+              </div>
+              <div class="signal">
+                <strong>ROI</strong>
+                <span>Mäts löpande</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section-header fade-in">
+          <div>
+            <p class="section-kicker">Vanliga flaskhalsar</p>
+            <h2 id="problem-title">När manuella processer bromsar tillväxten</h2>
+          </div>
+          <p class="section-copy">Många företag har redan systemen på plats, men saknar smarta kopplingar, automatiserade beslut och ett snabbare sätt att hantera återkommande arbete.</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card problem-card fade-in">
+            <div class="icon" aria-hidden="true">↻</div>
+            <div>
+              <h3>Repetitiva manuella arbetsuppgifter</h3>
+              <p>Team lägger värdefull tid på kopiering, uppföljning och administration.</p>
+            </div>
+          </article>
+          <article class="card problem-card fade-in">
+            <div class="icon" aria-hidden="true">⏱</div>
+            <div>
+              <h3>Långsamma svarstider</h3>
+              <p>Kunder får vänta, trots att många svar kan hanteras direkt och konsekvent.</p>
+            </div>
+          </article>
+          <article class="card problem-card fade-in">
+            <div class="icon" aria-hidden="true">◎</div>
+            <div>
+              <h3>Missade möjligheter</h3>
+              <p>Samtal, leads och ärenden riskerar att tappas när ingen hinner följa upp.</p>
+            </div>
+          </article>
+          <article class="card problem-card fade-in">
+            <div class="icon" aria-hidden="true">⇄</div>
+            <div>
+              <h3>System som inte pratar med varandra</h3>
+              <p>Data fastnar mellan CRM, e-post, formulär, databaser och interna verktyg.</p>
+            </div>
+          </article>
+          <article class="card problem-card fade-in">
+            <div class="icon" aria-hidden="true">□</div>
+            <div>
+              <h3>Administration före värdeskapande</h3>
+              <p>Personalens tid binds upp i uppgifter som automation kan avlasta.</p>
+            </div>
+          </article>
+          <article class="card problem-card fade-in">
+            <div class="icon" aria-hidden="true">✓</div>
+            <div>
+              <h3>Otydlig effekt av AI</h3>
+              <p>AI-test blir lätt isolerade demos om de inte kopplas till verkliga affärsprocesser.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="losningar" aria-labelledby="solution-title">
+      <div class="container">
+        <div class="solution-band fade-in">
+          <div>
+            <p class="section-kicker">Lösningen</p>
+            <h2 id="solution-title">AI-automation för verkliga affärsprocesser</h2>
+            <p>Vi kartlägger era arbetsflöden, identifierar var AI och automation kan ge störst effekt och bygger lösningar som integreras med era befintliga system.</p>
+          </div>
+          <ul class="check-list" aria-label="EH Tech AB:s fokusområden">
+            <li><span class="check" aria-hidden="true">✓</span><span>Praktiska flöden som används i vardagen</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Snabb implementation med n8n och AI</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Mätning av tid, kvalitet och affärsnytta</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Integration med befintliga verktyg</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="ai-receptionist" aria-labelledby="receptionist-title">
+      <div class="container featured">
+        <div class="feature-copy fade-in">
+          <p class="section-kicker">Flaggskeppslösning</p>
+          <h2 id="receptionist-title">AI-receptionist med realtidskommunikation</h2>
+          <p class="lead">En AI-receptionist hjälper företag att hantera kunddialoger direkt, kvalificera ärenden och skicka rätt information vidare innan affärsmöjligheter tappas.</p>
+          <div class="benefit-grid">
+            <div class="benefit"><span class="check" aria-hidden="true">✓</span>Svarar direkt på kundförfrågningar</div>
+            <div class="benefit"><span class="check" aria-hidden="true">✓</span>Hanterar inkommande dialoger</div>
+            <div class="benefit"><span class="check" aria-hidden="true">✓</span>Kvalificerar leads och ärenden</div>
+            <div class="benefit"><span class="check" aria-hidden="true">✓</span>Skickar information till rätt person eller system</div>
+            <div class="benefit"><span class="check" aria-hidden="true">✓</span>Kan integreras med befintliga verktyg</div>
+            <div class="benefit"><span class="check" aria-hidden="true">✓</span>Minskar missade möjligheter</div>
+            <div class="benefit"><span class="check" aria-hidden="true">✓</span>Förbättrar kundupplevelsen</div>
+            <div class="benefit"><span class="check" aria-hidden="true">✓</span>Frigör tid för personalen</div>
+          </div>
+        </div>
+        <div class="conversation fade-in" aria-label="Exempel på AI-receptionist">
+          <div class="chat">
+            <div class="bubble">Hej, jag vill veta om ni kan hjälpa oss med supportärenden efter kontorstid.</div>
+            <div class="bubble ai">Absolut. Jag kan samla in behov, prioritet och kontaktuppgifter direkt. Gäller det befintliga kunder eller nya förfrågningar?</div>
+            <div class="bubble">Båda. Vi missar flera inkommande leads varje vecka.</div>
+            <div class="bubble ai">Då markerar jag detta som leadshantering och kundservice. Jag skickar en sammanfattning till rätt ansvarig och skapar uppföljning i ert CRM.</div>
+          </div>
+          <div class="routing-box">
+            <strong>Automatisk vidarebefordran</strong>
+            <span>Lead kvalificerat, ansvarig notifierad och nästa steg dokumenterat.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-header fade-in">
+          <div>
+            <p class="section-kicker">Tjänster</p>
+            <h2 id="services-title">Skräddarsydd automation där den gör störst nytta</h2>
+          </div>
+          <p class="section-copy">Från första processkartläggning till färdiga flöden, integrationer och AI-assistenter som stöttar det dagliga arbetet.</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card service-card fade-in">
+            <div class="icon" aria-hidden="true">⚙</div>
+            <h3>AI-automation av arbetsflöden</h3>
+            <p>Automatisera återkommande steg med AI som förstår kontext och kan agera utifrån tydliga regler.</p>
+          </article>
+          <article class="card service-card fade-in">
+            <div class="icon" aria-hidden="true">n8n</div>
+            <h3>n8n-automation</h3>
+            <p>Bygg robusta flöden som kopplar ihop verktyg, API:er och interna system.</p>
+          </article>
+          <article class="card service-card fade-in">
+            <div class="icon" aria-hidden="true">☎</div>
+            <h3>AI-receptionist</h3>
+            <p>Hantera kunddialoger i realtid, minska missade leads och skapa snabbare uppföljning.</p>
+          </article>
+          <article class="card service-card fade-in">
+            <div class="icon" aria-hidden="true">AI</div>
+            <h3>Skräddarsydda AI-assistenter</h3>
+            <p>Assistenter för support, intern kunskap, dokumentation, research och operativt stöd.</p>
+          </article>
+          <article class="card service-card fade-in">
+            <div class="icon" aria-hidden="true">%</div>
+            <h3>Processkartläggning och ROI-analys</h3>
+            <p>Identifiera vilka processer som har störst potential att spara tid och kostnad.</p>
+          </article>
+          <article class="card service-card fade-in">
+            <div class="icon" aria-hidden="true">⇆</div>
+            <h3>Integrationer mellan affärssystem</h3>
+            <p>Skapa bättre dataflöden mellan CRM, ekonomi, support, e-post och kommunikationsverktyg.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="hur-jag-jobbar" aria-labelledby="work-title">
+      <div class="container work-grid">
+        <aside class="sticky-note fade-in">
+          <p class="section-kicker">Metod</p>
+          <h2 id="work-title">Hur jag jobbar</h2>
+          <p>Jag arbetar med en snabb och praktisk metod där målet är att gå från identifierat problem till fungerande automation så snabbt som möjligt, utan att tappa fokus på kvalitet, säkerhet eller affärsnytta.</p>
+        </aside>
+        <div class="method-list">
+          <article class="method-card fade-in">
+            <div class="number" aria-hidden="true">01</div>
+            <div>
+              <h3>n8n som automationsmotor</h3>
+              <p>Jag använder n8n som grund för många automationer eftersom det gör det möjligt att bygga, testa och vidareutveckla arbetsflöden snabbt. Med n8n kan jag koppla ihop system, API:er, databaser, CRM, e-post, formulär, kommunikationsverktyg och AI-modeller i flexibla flöden.</p>
+            </div>
+          </article>
+          <article class="method-card fade-in">
+            <div class="number" aria-hidden="true">02</div>
+            <div>
+              <h3>Snabbare implementation med AI-assistenter</h3>
+              <p>Jag arbetar alltid med egna AI-assistenter som stöd i research, planering, dokumentation, testning, innehållsproduktion och teknisk implementation. Det gör att jag i många automationsprojekt kan producera snabbare än traditionella arbetssätt där mycket görs manuellt från grunden.</p>
+            </div>
+          </article>
+          <article class="method-card fade-in">
+            <div class="number" aria-hidden="true">03</div>
+            <div>
+              <h3>Fokus på affärsnytta</h3>
+              <p>Varje automation ska ha ett tydligt syfte: spara tid, minska kostnader, höja kvaliteten eller skapa bättre kundupplevelser. Därför börjar arbetet alltid med att förstå processen, identifiera flaskhalsar och bedöma var automation kan ge störst ROI.</p>
+            </div>
+          </article>
+          <article class="method-card fade-in">
+            <div class="number" aria-hidden="true">04</div>
+            <div>
+              <h3>Bygg snabbt, mät och förbättra</h3>
+              <p>Istället för långa projektcykler arbetar jag iterativt. Först byggs en fungerande version, sedan mäts effekten och lösningen förbättras utifrån verklig användning. Målet är inte att ersätta teknisk kvalitet, utan att minska onödig manuell utvecklingstid och fokusera på resultat.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roi" aria-labelledby="roi-title">
+      <div class="container">
+        <div class="section-header fade-in">
+          <div>
+            <p class="section-kicker">Mätbar effekt</p>
+            <h2 id="roi-title">Automation som ska gå att räkna hem</h2>
+          </div>
+          <p class="section-copy">EH Tech AB fokuserar på lösningar där nyttan kan följas upp i konkreta verksamhetsmått, inte bara i teknisk funktionalitet.</p>
+        </div>
+        <div class="roi-strip">
+          <div class="metric fade-in"><strong>Sparade timmar per vecka</strong><p>Mindre tid på återkommande handpåläggning.</p></div>
+          <div class="metric fade-in"><strong>Snabbare svarstider</strong><p>Kunder får konsekventa svar när behovet uppstår.</p></div>
+          <div class="metric fade-in"><strong>Mindre manuellt arbete</strong><p>Färre repetitiva moment och färre felkällor.</p></div>
+          <div class="metric fade-in"><strong>Bättre leadshantering</strong><p>Fler inkommande möjligheter fångas upp och kvalificeras.</p></div>
+          <div class="metric fade-in"><strong>Lägre operationella kostnader</strong><p>Personal kan fokusera på mer värdeskapande arbete.</p></div>
+          <div class="metric fade-in"><strong>Mer konsekvent kundkommunikation</strong><p>Samma kvalitet och struktur i varje kundkontakt.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt process" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section-header fade-in">
+          <div>
+            <p class="section-kicker">Process</p>
+            <h2 id="process-title">Från arbetsflöde till fungerande automation</h2>
+          </div>
+          <p class="section-copy">En tydlig, lean och resultatdriven process gör det enklare att börja där affärsnyttan är störst.</p>
+        </div>
+        <div class="grid grid-4">
+          <article class="card process-card fade-in">
+            <h3>Kartlägg arbetsflödet</h3>
+            <p>Vi går igenom hur processen fungerar idag och var tid, kvalitet eller affärer tappas.</p>
+          </article>
+          <article class="card process-card fade-in">
+            <h3>Identifiera automationsmöjligheter</h3>
+            <p>Vi prioriterar de flöden där AI och automation kan ge störst effekt snabbast.</p>
+          </article>
+          <article class="card process-card fade-in">
+            <h3>Bygg och integrera lösningen</h3>
+            <p>Automationer byggs med n8n, AI-assistenter och integrationer med era verktyg.</p>
+          </article>
+          <article class="card process-card fade-in">
+            <h3>Mät ROI och optimera</h3>
+            <p>Effekten följs upp och lösningen förbättras utifrån verklig användning.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt" aria-labelledby="contact-title">
+      <div class="container contact-wrap">
+        <div class="contact-panel fade-in">
+          <p class="section-kicker">Kontakt</p>
+          <h2 id="contact-title">Vill du hitta era bästa automationsmöjligheter?</h2>
+          <p>Boka ett samtal så går vi igenom vilka processer i din verksamhet som kan automatiseras med tydlig affärsnytta.</p>
+          <div class="hero-actions">
+            <a class="button button-secondary" href="mailto:kontakt@ehtech.se?subject=Boka%20ett%20samtal%20om%20AI-automation">Boka ett samtal</a>
+          </div>
+        </div>
+        <form class="contact-form fade-in" id="contact-form" aria-label="Kontaktformulär">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Namn</label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="company">Företag</label>
+              <input id="company" name="company" type="text" autocomplete="organization" required>
+            </div>
+            <div class="field field-full">
+              <label for="email">E-post</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field field-full">
+              <label for="process">Vilken process vill du automatisera?</label>
+              <input id="process" name="process" type="text" placeholder="Exempel: kundservice, leadshantering eller intern administration">
+            </div>
+            <div class="field field-full">
+              <label for="message">Meddelande</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+          </div>
+          <p class="form-note" id="form-note" aria-live="polite"></p>
+          <button class="button button-primary button-full" type="submit">Boka ett samtal</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <strong>EH Tech AB</strong>
+      <span>AI-automation, n8n och praktiska lösningar med fokus på ROI.</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-button");
+    const navLinks = document.querySelector("#nav-links");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      document.body.classList.toggle("menu-open", isOpen);
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("menu-open");
+      });
+    });
+
+    const revealItems = document.querySelectorAll(".fade-in");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("visible"));
+    }
+
+    document.querySelector("#contact-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const note = document.querySelector("#form-note");
+      note.textContent = "Tack! Formuläret är redo att kopplas till e-post eller CRM.";
+      event.currentTarget.reset();
+    });
+  </script>
 </body>
 </html>
